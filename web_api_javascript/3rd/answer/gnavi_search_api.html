@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-HACK 動画検索</title>
+</head>
+
+<body>
+
+  <!-- 検索フォーム -->
+  <div class="row">
+    <div class="small-6 large-4 columns">
+      <a class="button" onclick="loadUrl()">検索</a>
+    </div>
+  </div>
+
+  <!-- リスト -->
+  <div id="main-block" class="row small-up-1 medium-up-2 large-up-3">
+  </div>
+
+  <script>
+    // 本来はサーバー側で処理してユーザーからは見えないようにする
+    const API_KEY = ""; // apikeyを入力 注意：gitにapikeyを上げないように！！
+    const mainBlock = document.getElementById("main-block");
+
+    function loadUrl() {
+      // URLの生成 本来はサーバー側で処理すべき(apikeyがユーザーに見えてしまうので)
+      // 課題：検索ワードを受け取れるようにしてみよう
+      let _url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${API_KEY}&freeword=焼肉`;
+      // Ajax(XMLHttpRequest)処理
+      // APIを実行して結果のJSONデータを加工している
+      let xhttp = new XMLHttpRequest();
+      // 通信が終わった時の処理
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          let res = JSON.parse(xhttp.responseText);
+          for (let i = 0; i < res.rest.length; i++) {
+            let node = document.createElement("div");
+            node.innerHTML += res.rest[i].name;
+            mainBlock.appendChild(node);
+          }
+        }
+      };
+      // データ取得開始
+      xhttp.open("GET", _url, true);
+      xhttp.send();
+    }
+  </script>
+</body>
+
+</html>

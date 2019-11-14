@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-HACK WebAPI 勉強会</title>
+
+  <style>
+    #button:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <form style="margin-bottom: 30px;" id="seachForm">
+    ジャンル
+    <input type="text" id="genre"><br>
+    <!-- 場所<input type="text" id="place"><br> -->
+    禁煙席
+    <input type="checkbox" value="" name="smoke">あり<br>
+    エリア
+    <select id="areaSelect"></select>
+  </form>
+
+  <!-- ボタン -->
+  <button class="button" id="button">検索</button>
+
+  <!-- リスト -->
+  <div id="main-block"></div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-HACK WebAPI 勉強会</title>
+</head>
+
+<body>
+  <!-- ボタン -->
+  <a class="button" onclick="addCardItem()">追加</a>
+  <!-- リスト -->
+  <div id="main-block"></div>
+
+  <script>
+    // 親要素を取得
+    const mainBlock = document.getElementById("main-block");
+    // JSONの代わりにデータをオブジェクトで定義
+    let data = {
+      image: "https://grapee.jp/wp-content/uploads/32187_main2.jpg",
+      description: "猫の画像です"
+    }
+
+    // DOMを動的に生成している
+    function addCardItem() {
+      var node = document.createElement("div");
+      // `data`変数の中の、`image`を使用する
+      // `${変数}`という書き方は覚えておきましょう
+      // シングルクォテーション、ダブルクォテーションじゃないことに注意
+      var moji1 = "文字列をダブルクォテーションの中に書く";
+      var moji2 = '文字列をシングルクォテーションの中に書く';
+      var moji3 = `文字列を${data.image}の中に書く`;
+      node.innerHTML = `<img src="${data.image}" alt=""><p>${data.description}</p>`;
+      mainBlock.appendChild(node);
+    }
+  </script>
+</body>
+
+</html>

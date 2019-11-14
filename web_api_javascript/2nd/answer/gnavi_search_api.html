@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-HACK 動画検索</title>
+</head>
+
+<body>
+
+  <!-- ボタン -->
+  <a class="button" onclick="loadData()">追加</a>
+  <!-- リスト -->
+  <div id="main-block"></div>
+
+  <script>
+    // 親要素を取得
+    const mainBlock = document.getElementById("main-block");
+
+    let data = {
+      // お題：データを追加してみよう！
+      // image1: "https://grapee.jp/wp-content/uploads/32187_main2.jpg",
+      // image2: "https://grapee.jp/wp-content/uploads/32187_main2.jpg",
+      // image3: "https://grapee.jp/wp-content/uploads/32187_main2.jpg",
+      images: [
+        "https://grapee.jp/wp-content/uploads/32187_main2.jpg",
+        "http://d2dcan0armyq93.cloudfront.net/photo/odai/600/f49459ac1abdc1f6130807d9d9d1c610_600.jpg",
+        "https://imgcp.aacdn.jp/img-a/800/auto/aa/gm/article/3/1/8/0/6/201801222224/neko2.jpg"
+      ],
+      description: [
+        "猫の画像1です ミャオ",
+        "猫の画像2です ニャーゴ",
+        "猫の画像3です にゃおにゃお",
+      ]
+    }
+
+    function loadData(){
+      for (let i = 0; i < data.images.length; i++) {
+        addCardItem(data.images[i], data.description[i]);
+      }
+    }
+
+    // DOMを動的に生成している
+    function addCardItem(item, description) {
+      var node = document.createElement("div");
+      node.innerHTML = `<img src="${item}" alt=""><p>${description}</p>`;
+      mainBlock.appendChild(node);
+    }
+  </script>
+</body>
+
+</html>
