@@ -1,0 +1,19 @@
+@charset 'UTF-8';
+
+.column {
+  position: relative;
+  margin-bottom: 50px;
+}
+.fa-star {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: grey;
+  font-size: 18px;
+  display: inline-block;
+  text-align: right;
+}
+
+img {
+  width: 100%;
+}
