@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+​
+​
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todoタスク</title>
+</head>
+​
+<body>
+  <div class="container" id="todo">
+    <section class="panel">
+      タイトル：<input type="text" class="text-input" v-model="inputTitle">
+      内容：<input type="text" class="text-input" v-model="inputText">
+      <select v-model="memberId">
+        <option v-for="member in members" v-bind:value="member.id">{{ member.name }}</option>
+      </select>
+      <button @click="addTodo">追加</button><br><br>
+      <button @click="allCheck">全選択</button>
+      <button @click="allDelete">全削除</button>
+      <button @click="deleteCheck">チェックしたものを削除</button>
+    </section>
+
+    <div>
+      <div style="float: left;">
+        <ul>
+          <li v-for="(todo, index) in todos">
+            <input type="checkbox" class="checkbox" v-model="todo.checked">
+            <label for="checkbox">{{todo.title}}</label>
+            <select v-model="todo.member_id">
+              <option v-for="member in members" v-bind:value="member.id">{{ member.name }}</option>
+            </select>
+            <button class="delete" @click="deletetodo(index)">削除</button><br>
+            <span>内容：{{ todo.text }}</span>
+            <br><br>
+          </li>
+        </ul>
+      </div>
+
+      <div style="float: right;">
+      </div>
+      <div></div>
+    </div>
+​
+
+    <!-- <input type="checkbox" v-model="toggle"> -->
+  </div>
+​
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#todo",
+      data: {
+        inputTitle: "タイトル(仮)",
+        inputText: "テキストを入力する",
+        memberId: 1,
+        checked: false,
+        todos: [
+          {id: 1, title: "人事評価", text: "給与の査定", member_id: 1, checked: false},
+          {id: 2, title: "面接", text: "田中さん", member_id: 1, checked: false},
+          {id: 3, title: "役員会議資料作成", text: "決算", member_id: 1, checked: false},
+          {id: 4, title: "人事評価", text: "給与の査定", member_id: 2, checked: false},
+          {id: 5, title: "進捗報告1", text: "Aプロジェクト", member_id: 2, checked: false},
+          {id: 6, title: "エクセル作成", text: "整理する", member_id: 3, checked: false}
+        ],
+        members: [
+          {id: 1, name: "部長"},
+          {id: 2, name: "課長"},
+          {id: 3, name: "主任"},
+          {id: 4, name: "係長"}
+        ]
+      },
+      methods: {
+        addTodo: function () {
+          const index = parseInt(this.todos[this.todos.length - 1].id);
+          this.todos.push({
+            id: index + 1,
+            title: this.inputTitle,
+            text: this.inputText,
+            member_id: parseInt(this.memberId),
+            checked: this.checked
+          })
+        },
+        deletetodo: function (del_index) {
+          if (confirm('Todoを削除しますか？')) {
+            this.todos.splice(del_index, 1);
+          }
+        },
+        // チェックしたものを削除
+        deleteCheck: function() {
+          this.todos = this.todos.filter(todo => todo.checked === false);
+        },
+        // すべてチェック
+        allCheck: function() {
+          this.todos.forEach(todo => todo.checked = true);
+        },
+        // 担当者変更
+        changeCharge: function() {
+          console.log('担当者変更');
+        },
+        // 全削除
+        allDelete: function() {
+          console.log('全削除');
+        },
+        // 削除リスト一覧表示
+        deleteShow: function() {
+          console.log('削除リスト表示');
+        },
+        // 削除リストを復元
+        deleteRecover: function() {
+          console.log('削除リストを復元');
+        },
+        // ステータスを変更・管理
+        statusChange: function() {
+          console.log('ステータスを変更・管理');
+        }
+      }
+    });
+  </script>
+</body>
+​
+​
+</html>
