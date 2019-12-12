@@ -23,13 +23,13 @@
       <button @click="deleteCheck">チェックしたものを削除</button>
     </section>
 
-    <div>
+    <div style="width: 600px;">
       <div style="float: left;">
         <ul>
           <li v-for="(todo, index) in todos">
             <input type="checkbox" class="checkbox" v-model="todo.checked">
             <label for="checkbox">{{todo.title}}</label>
-            <select v-model="todo.member_id">
+            <select v-model="todo.member_id" @change="changeCharge">
               <option v-for="member in members" v-bind:value="member.id">{{ member.name }}</option>
             </select>
             <button class="delete" @click="deletetodo(index)">削除</button><br>
@@ -40,6 +40,14 @@
       </div>
 
       <div style="float: right;">
+        <ul>
+          <li v-for="member in members">
+            <p>{{member.name}}</p>
+            <ul v-for="todo in todos">
+              <li v-if="member.id === todo.member_id">{{ todo.title }}</li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <div></div>
     </div>
