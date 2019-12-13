@@ -29,7 +29,7 @@
           <li v-for="(todo, index) in todos">
             <input type="checkbox" class="checkbox" v-model="todo.checked">
             <label for="checkbox">{{todo.title}}</label>
-            <select v-model="todo.member_id" @change="changeCharge">
+            <select v-model="todo.member_id">
               <option v-for="member in members" v-bind:value="member.id">{{ member.name }}</option>
             </select>
             <button class="delete" @click="deletetodo(index)">削除</button><br>
@@ -82,7 +82,10 @@
       },
       methods: {
         addTodo: function () {
-          const index = parseInt(this.todos[this.todos.length - 1].id);
+          let index = 0;
+          if(this.todos.length > 0) {
+            index = parseInt(this.todos[this.todos.length - 1].id);
+          }
           this.todos.push({
             id: index + 1,
             title: this.inputTitle,
@@ -105,9 +108,9 @@
           this.todos.forEach(todo => todo.checked = true);
         },
         // 担当者変更
-        changeCharge: function() {
-          console.log('担当者変更');
-        },
+        // changeCharge: function() {
+        //   console.log('担当者変更');
+        // },
         // 全削除
         allDelete: function() {
           console.log('全削除');
